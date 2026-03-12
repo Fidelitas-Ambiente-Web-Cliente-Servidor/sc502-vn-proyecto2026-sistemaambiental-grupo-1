@@ -1,0 +1,12 @@
+body{
+    margin:0;
+    height:100vh;
+
+    display:grid;
+    place-items:center;
+
+    background-image: url("fondo.png"); /* nombre de tu imagen */
+    background-size: cover;      /* cubre toda la pantalla */
+    background-position: center; /* centra la imagen */
+    background-repeat: no-repeat;
+}
