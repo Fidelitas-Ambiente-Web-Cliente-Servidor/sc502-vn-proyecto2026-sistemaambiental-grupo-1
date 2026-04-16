@@ -39,8 +39,18 @@ if (!password_verify($password, $usuario['password_hash'])) {
 }
 
 http_response_code(200);
-echo json_encode([
-	'response' => '00',
-	'message' => 'Login exitoso.',
-	'redirect' => '../../HTML/index.html'
-]);
+$redirectUrl = '../../HTML/index.html';
+$esAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH'])
+	&& strtolower((string) $_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+
+if ($esAjax) {
+	echo json_encode([
+		'response' => '00',
+		'message' => 'Login exitoso.',
+		'redirect' => $redirectUrl
+	]);
+	exit;
+}
+
+header('Location: ' . $redirectUrl);
+exit;
