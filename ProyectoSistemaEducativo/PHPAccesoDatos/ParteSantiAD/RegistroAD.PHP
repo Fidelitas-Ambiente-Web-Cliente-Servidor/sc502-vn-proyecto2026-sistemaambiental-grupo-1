@@ -27,4 +27,16 @@ class RegistroAD
 
 		return $stmt->fetch() !== false;
 	}
+
+	public static function registrarUsuario(string $username, string $passwordHash): bool
+	{
+		$conexion = self::crearConexion();
+		$sql = 'INSERT INTO usuarios (username, password_hash) VALUES (:username, :password_hash)';
+		$stmt = $conexion->prepare($sql);
+
+		return $stmt->execute([
+			'username' => $username,
+			'password_hash' => $passwordHash,
+		]);
+	}
 }

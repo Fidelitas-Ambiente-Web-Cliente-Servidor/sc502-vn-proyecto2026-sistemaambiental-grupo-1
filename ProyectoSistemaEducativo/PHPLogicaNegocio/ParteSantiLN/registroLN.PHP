@@ -32,6 +32,28 @@ if ($usuarioExistente) {
 	echo json_encode(['response' => '01', 'message' => 'El username ya existe. Elige otro distinto.']);
 	exit;
 }
+$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-echo json_encode(['response' => '00', 'message' => 'Username disponible.']);
+try {
+	$registrado = RegistroAD::registrarUsuario($username, $passwordHash);
+} catch (PDOException $e) {
+	if ($e->getCode() === '23000') {
+		http_response_code(409);
+		echo json_encode(['response' => '01', 'message' => 'El username ya existe. Elige otro distinto.']);
+		exit;
+	}
+
+	http_response_code(500);
+	echo json_encode(['response' => '01', 'message' => 'No se pudo registrar el usuario.']);
+	exit;
+}
+
+if (!$registrado) {
+	http_response_code(500);
+	echo json_encode(['response' => '01', 'message' => 'No se pudo registrar el usuario.']);
+	exit;
+}
+
+http_response_code(201);
+echo json_encode(['response' => '00', 'message' => 'Usuario registrado correctamente.']);
 
