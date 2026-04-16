@@ -1,21 +1,11 @@
 <?php
+require_once __DIR__ . '/../Coneccion.PHP';
     
 class RegistroAD
 {
 	public static function crearConexion(): PDO
 	{
-		$host = getenv('DB_HOST') ?: 'localhost';
-		$port = getenv('DB_PORT') ?: '3307';
-		$dbname = getenv('DB_NAME') ?: 'sistema_educativo';
-		$user = getenv('DB_USER') ?: 'root';
-		$pass = getenv('DB_PASS') ?: '';
-
-		$dsn = "mysql:host={$host};port={$port};dbname={$dbname};charset=utf8mb4";
-
-		return new PDO($dsn, $user, $pass, [
-			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-		]);
+		return Coneccion::obtenerConexion();
 	}
 
 	public static function existeUsuarioPorUsername(string $username): bool
@@ -25,8 +15,9 @@ class RegistroAD
 		$stmt = $conexion->prepare($sql);
 		$stmt->execute(['username' => $username]);
 
-		return $stmt->fetch() !== false;
+		return (bool) $stmt->fetch();
 	}
+
 
 	public static function registrarUsuario(string $username, string $passwordHash): bool
 	{
