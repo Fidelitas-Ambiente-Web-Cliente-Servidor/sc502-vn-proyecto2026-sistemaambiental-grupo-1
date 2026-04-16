@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro | EduAmbiente</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light d-flex flex-column min-vh-100 fondo">
+    <header class="navbar navbar-dark fw-bold bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="MDashboard.html">EduAmbiente</a>
+        </div>
+    </header>
+
+    <main class="flex-grow-1 d-flex justify-content-center align-items-center">
+        <section class="container py-4">
+            <div id="errorCampos" class="card shadow-sm d-none" style="width: 24rem;">
+                <div class="FaltaCampos">
+                    <h5 class="card-title">Falta un campo por llenar</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Completa todos los campos requeridos</h6>
+                    <p class="card-text">Algunos campos obligatorios no han sido completados. Revisa el formulario antes de continuar.</p>
+                    <button class="btn btn-success volver-registro" type="button">Volver al registro</button>
+                </div>
+            </div>
+
+            <div id="errorUsuario" class="card shadow-sm d-none" style="width: 24rem;">
+                <div class="UsuarioExistente">
+                    <h5 class="card-title">Usuario ya existente</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Elige otro nombre de usuario</h6>
+                    <p class="card-text">El nombre de usuario que intentaste registrar ya está en uso. Prueba con uno diferente.</p>
+                    <button class="btn btn-success volver-registro" type="button">Volver al registro</button>
+                </div>
+            </div>
+
+            <div id="errorServidor" class="card shadow-sm d-none" style="width: 24rem;">
+                <div class="ErrorServidor">
+                    <h5 class="card-title">Error al registrar usuario</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">No se pudo completar el proceso</h6>
+                    <p class="card-text">Ocurrió un error inesperado al intentar registrar el usuario. Intenta de nuevo en unos minutos.</p>
+                    <button class="btn btn-success volver-registro" type="button">Volver al registro</button>
+                </div>
+            </div>
+
+            <div id="errorDefault" class="card shadow-sm d-none" style="width: 24rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Sin error definido</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">No se indicó un tipo de error</h6>
+                    <p class="card-text">Abre esta página con un parámetro como <strong>?tipo=campos</strong>, <strong>?tipo=usuario</strong> o <strong>?tipo=servidor</strong>.</p>
+                    <a class="btn btn-success" href="registro.html">Ir al registro</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-success text-white text-center p-3 mt-auto">
+        © 2026 EduAmbiente | Universidad Fidelitas | Cliente Servidor Web | Grupo 1
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="../../JS/ErrorRegistroFaltancamposl.JS"></script>
+</body>
+
+</html>
