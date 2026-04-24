@@ -39,7 +39,8 @@ if (!password_verify($password, $usuario['password_hash'])) {
 }
 
 http_response_code(200);
-$redirectUrl = '../../HTML/index.html';
+// Cambio aquí: redirigir al dashboard
+$redirectUrl = '../../HTML/ParteSanti/MDashboard.html';
 
 echo json_encode([
     'response' => '00',
