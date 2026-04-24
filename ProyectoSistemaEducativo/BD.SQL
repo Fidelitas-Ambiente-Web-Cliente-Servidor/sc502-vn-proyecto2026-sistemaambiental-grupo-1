@@ -39,3 +39,19 @@ CREATE TABLE IF NOT EXISTS educacion_ambiental (
     descripcion TEXT NOT NULL,
     enlace VARCHAR(255)
 );
+
+-- Tabla de Recursos Educativos
+CREATE TABLE IF NOT EXISTS recursos_educativos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(150) NOT NULL,
+    descripcion TEXT NOT NULL,
+    enlace VARCHAR(255)
+);
+
+-- Tabla de Rutas de Reciclaje
+CREATE TABLE IF NOT EXISTS rutas_reciclaje (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(150) NOT NULL,
+    descripcion TEXT NOT NULL,
+    enlace VARCHAR(255)
+);
