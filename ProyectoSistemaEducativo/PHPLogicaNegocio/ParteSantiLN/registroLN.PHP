@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../PHPAccesoDatos/ParteSantiAD/RegistroAD.PHP';
+require_once __DIR__ . '/../../PHPAccesoDatos/ParteSantiAD/RegistroAD.php';
 
 class RegistroLN
 {

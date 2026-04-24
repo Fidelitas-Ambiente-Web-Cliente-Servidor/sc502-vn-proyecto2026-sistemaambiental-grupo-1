@@ -11,42 +11,83 @@
 
 <body class="bg-light d-flex flex-column min-vh-100 fondo">
     <header class="navbar navbar-dark fw-bold bg-success">
-  <div class="container-fluid">
-    <a class="navbar-brand text-white" href="MDashboard.html">
-      EduAmbiente
-    </a>
-  </div>
-</header>
-<main class="flex-grow-1 d-flex justify-content-center align-items-center">
-    <div class="card" style="width: 30rem;">
-        <div class="card-body">
-            <h5 class="card-title">Registro</h5>
-            <div id="mensaje" class="alert d-none mb-3"></div>
-            <form id="formRegister" novalidate>
-                <div class="mb-3">
-                    <label for="username" class="form-label">Usuario</label>
-                    <input id="username" name="username" type="text" class="form-control" placeholder="Tu usuario" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input id="password" name="password" type="password" class="form-control" placeholder="Aa@1234567" required>
-                </div>
-
-                <button type="submit" class="btn btn-success">Registrarse</button>
-                <a href="MDashboard.html" class="btn btn-success">Registrarse con Google</a>
-            </form>
-
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="MDashboard.html">
+                EduAmbiente
+            </a>
         </div>
-    </div>
-</main>
-<footer class="bg-success text-white text-center p-3 mt-auto">
-© 2026 EduAmbiente | Universidad Fidelitas | Cliente Servidor Web | Grupo 1
-</footer>
+    </header>
+    <main class="flex-grow-1 d-flex justify-content-center align-items-center">
+        <div class="card" style="width: 30rem;">
+            <div class="card-body">
+                <h5 class="card-title">Registro</h5>
+                <div id="mensaje" class="alert d-none mb-3"></div>
+                
+                <form action="../../PHPLogicaNegocio/ParteSantiLN/registroLN.php" method="POST" id="formRegister" novalidate>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Usuario</label>
+                        <input id="username" name="username" type="text" class="form-control" placeholder="Tu usuario" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input id="password" name="password" type="password" class="form-control" placeholder="Aa@1234567" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Registrarse</button>
+                    <a href="MDashboard.html" class="btn btn-success">Registrarse con Google</a>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-success text-white text-center p-3 mt-auto">
+        © 2026 EduAmbiente | Universidad Fidelitas | Cliente Servidor Web | Grupo 1
+    </footer>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-<script src="../../JS/ErrorRegistroFaltancamposl.JS"></script>
+
+<script src="../../JS/ErrorRegistroFaltancampos.JS"></script>
+
+<script>
+document.getElementById('formRegister').addEventListener('submit', function(e) {
+    e.preventDefault(); // Evita el envío clásico del formulario
+    const formData = new FormData(this);
+
+    fetch(this.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        const mensaje = document.getElementById('mensaje');
+        mensaje.classList.remove('d-none', 'alert-danger', 'alert-success');
+
+        if (data.response === "00") {
+            // Éxito: mostrar mensaje y redirigir
+            mensaje.classList.add('alert-success');
+            mensaje.textContent = data.message;
+
+            // Redirigir después de 1 segundo
+            setTimeout(() => {
+                window.location.href = data.redirect;
+            }, 1000);
+        } else {
+            // Error: mostrar mensaje
+            mensaje.classList.add('alert-danger');
+            mensaje.textContent = data.message;
+        }
+    })
+    .catch(err => {
+        const mensaje = document.getElementById('mensaje');
+        mensaje.classList.remove('d-none');
+        mensaje.classList.add('alert-danger');
+        mensaje.textContent = "Error en la conexión con el servidor.";
+        console.error(err);
+    });
+});
+</script>
+
 
 </html>
